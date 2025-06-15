@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 100 Companies for Frontend Engineers (20+ LPA) - India</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .filters {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group input, .filter-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            max-height: 70vh;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        th {
+            background: #343a40;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .company-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .salary-range {
+            font-weight: 600;
+            color: #27ae60;
+        }
+        
+        .wlb-excellent { color: #27ae60; font-weight: 600; }
+        .wlb-good { color: #f39c12; font-weight: 600; }
+        .wlb-average { color: #e74c3c; font-weight: 600; }
+        
+        .tier-1 { background: #e8f5e8; }
+        .tier-2 { background: #fff3cd; }
+        .tier-3 { background: #f8d7da; }
+        
+        .location {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        
+        .tech-stack {
+            font-size: 12px;
+            color: #495057;
+        }
+        
+        .export-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0,123,255,0.4);
+        }
+        
+        .note {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Top 100 Companies for Frontend Engineers</h1>
+            <p>Product-based companies offering 20+ LPA with excellent work-life balance in India</p>
+        </div>
+        
+        <div class="note">
+            <strong>Note for Sameer:</strong> This list focuses on product-based companies with good WLB. Salary ranges are for 1.5-3 years experience. Many companies have remote/hybrid options. Always verify current salary ranges during interviews as they vary by location and negotiation.
+        </div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="🔍 Search companies..." />
+                <select id="locationFilter">
+                    <option value="">All Locations</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Delhi NCR">Delhi NCR</option>
+                    <option value="Chennai">Chennai</option>
+                </select>
+                <select id="wlbFilter">
+                    <option value="">All WLB Ratings</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Average">Average</option>
+                </select>
+                <select id="tierFilter">
+                    <option value="">All Tiers</option>
+                    <option value="Tier 1">Tier 1 (Premium)</option>
+                    <option value="Tier 2">Tier 2 (Good)</option>
+                    <option value="Tier 3">Tier 3 (Emerging)</option>
+                </select>
+                <select id="dsaFilter">
+                    <option value="">All DSA Levels</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Not required">Not required</option>
+                </select>
+                <select id="sortOptions">
+                    <option value="name-asc">Sort: Name (A-Z)</option>
+                    <option value="name-desc">Sort: Name (Z-A)</option>
+                    <option value="salary-desc">Sort: Salary (High-Low)</option>
+                    <option value="salary-asc">Sort: Salary (Low-High)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table id="companiesTable">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Tier</th>
+                        <th>Salary Range (LPA)</th>
+                        <th>Work-Life Balance</th>
+                        <th>Primary Location</th>
+                        <th>Tech Stack</th>
+                        <th>Remote Policy</th>
+                        <th>Interview Difficulty</th>
+                        <th>DSA & Rounds</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Companies data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <button class="export-btn" onclick="exportToCSV()">📊 Export to CSV</button>
+    
+    <script>
+        const companies = [
+            // Tier 1 Companies (FAANG + Top Product)
+            {name: "Google", tier: "Tier 1", salary: "25-45", wlb: "Good", location: "Bangalore, Mumbai", tech: "React, Angular, TypeScript, Next.js", remote: "Hybrid", difficulty: "Very Hard", dsaDetails: "Hard (3-4 rounds)", notes: "Excellent growth, top-tier compensation"},
+            {name: "Microsoft", tier: "Tier 1", salary: "22-40", wlb: "Excellent", location: "Bangalore, Hyderabad", tech: "React, TypeScript, Azure", remote: "Hybrid", difficulty: "Hard", dsaDetails: "Hard (3 rounds)", notes: "Great WLB, strong engineering culture"},
+            {name: "Amazon", tier: "Tier 1", salary: "20-35", wlb: "Average", location: "Bangalore, Chennai", tech: "React, Angular, AWS", remote: "Hybrid", difficulty: "Hard", dsaDetails: "Hard (3-4 rounds)", notes: "Fast-paced, high growth"},
+            {name: "Meta (Facebook)", tier: "Tier 1", salary: "28-50", wlb: "Good", location: "Bangalore", tech: "React, GraphQL, TypeScript", remote: "Hybrid", difficulty: "Very Hard", dsaDetails: "Very Hard (4-5 rounds)", notes: "Cutting-edge tech, stock options"},
+            {name: "Apple", tier: "Tier 1", salary: "25-42", wlb: "Good", location: "Bangalore", tech: "React, Swift UI, TypeScript", remote: "Office", difficulty: "Very Hard", dsaDetails: "Very Hard (4 rounds)", notes: "Premium products, design focus"},
+            {name: "Adobe", tier: "Tier 1", salary: "22-38", wlb: "Excellent", location: "Bangalore", tech: "React, Angular, Creative Cloud", remote: "Hybrid", difficulty: "Hard", dsaDetails: "Hard (3 rounds)", notes: "Creative tools, design-heavy"},
+            {name: "Salesforce", tier: "Tier 1", salary: "20-35", wlb: "Excellent", location: "Bangalore, Mumbai", tech: "React, Lightning, TypeScript", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Excellent culture, ohana values"},
+            {name: "Netflix", tier: "Tier 1", salary: "30-55", wlb: "Good", location: "Mumbai", tech: "React, Node.js, Microservices", remote: "Hybrid", difficulty: "Very Hard", dsaDetails: "Very Hard (4-5 rounds)", notes: "High performance culture"},
+            {name: "Uber", tier: "Tier 1", salary: "22-40", wlb: "Average", location: "Bangalore", tech: "React, React Native, Go", remote: "Hybrid", difficulty: "Hard", dsaDetails: "Hard (3-4 rounds)", notes: "Fast growth, global impact"},
+            {name: "Flipkart", tier: "Tier 1", salary: "20-35", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Hard (3 rounds)", notes: "Leading e-commerce, Indian unicorn"},
+            
+            // Tier 1 Fintech & Unicorns
+            {name: "Razorpay", tier: "Tier 1", salary: "20-38", wlb: "Good", location: "Bangalore", tech: "React, Node.js, TypeScript", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Hard (3 rounds)", notes: "Leading fintech, rapid growth"},
+            {name: "Paytm", tier: "Tier 1", salary: "18-32", wlb: "Average", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Fintech giant, public company"},
+            {name: "PhonePe", tier: "Tier 1", salary: "22-40", wlb: "Good", location: "Bangalore", tech: "React, React Native, Kotlin", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Hard (3 rounds)", notes: "Walmart-backed, UPI leader"},
+            {name: "Zomato", tier: "Tier 1", salary: "20-35", wlb: "Average", location: "Delhi NCR", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Food delivery leader, public"},
+            {name: "Swiggy", tier: "Tier 1", salary: "20-36", wlb: "Good", location: "Bangalore", tech: "React, Angular, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Food delivery, diversified"},
+            {name: "CRED", tier: "Tier 1", salary: "25-45", wlb: "Good", location: "Bangalore", tech: "React, React Native, Kotlin", remote: "Hybrid", difficulty: "Hard", dsaDetails: "Hard (3 rounds)", notes: "Premium fintech, high growth"},
+            {name: "Zerodha", tier: "Tier 1", salary: "20-32", wlb: "Excellent", location: "Bangalore", tech: "React, Python, Go", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Bootstrap success, tech-first"},
+            {name: "Dream11", tier: "Tier 1", salary: "20-35", wlb: "Good", location: "Mumbai", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Fantasy sports leader"},
+            {name: "Ola", tier: "Tier 1", salary: "18-30", wlb: "Average", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Mobility & electric vehicles"},
+            {name: "PolicyBazaar", tier: "Tier 1", salary: "18-28", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, .NET", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Insurance aggregator"},
+            
+            // Tier 2 Product Companies
+            {name: "Atlassian", tier: "Tier 2", salary: "22-38", wlb: "Excellent", location: "Bangalore", tech: "React, TypeScript, GraphQL", remote: "Remote", difficulty: "Hard", dsaDetails: "Hard (3 rounds)", notes: "Developer tools, remote-first"},
+            {name: "VMware", tier: "Tier 2", salary: "20-32", wlb: "Excellent", location: "Bangalore", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Enterprise software"},
+            {name: "Intuit", tier: "Tier 2", salary: "20-35", wlb: "Excellent", location: "Bangalore", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "QuickBooks, TurboTax"},
+            {name: "PayPal", tier: "Tier 2", salary: "20-35", wlb: "Good", location: "Bangalore, Chennai", tech: "React, Node.js, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Global payments"},
+            {name: "Cisco", tier: "Tier 2", salary: "18-30", wlb: "Excellent", location: "Bangalore", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Networking giant"},
+            {name: "Oracle", tier: "Tier 2", salary: "18-28", wlb: "Good", location: "Bangalore", tech: "React, Angular, Oracle DB", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Enterprise software"},
+            {name: "SAP", tier: "Tier 2", salary: "18-30", wlb: "Excellent", location: "Bangalore", tech: "React, Angular, SAP UI5", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Enterprise applications"},
+            {name: "Walmart Labs", tier: "Tier 2", salary: "20-32", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "E-commerce tech"},
+            {name: "Target", tier: "Tier 2", salary: "18-28", wlb: "Good", location: "Bangalore", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Retail technology"},
+            {name: "American Express", tier: "Tier 2", salary: "18-30", wlb: "Good", location: "Bangalore", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Financial services"},
+            
+            // Indian Unicorns & High-Growth
+            {name: "Byju's", tier: "Tier 2", salary: "15-25", wlb: "Average", location: "Bangalore", tech: "React, React Native, Node.js", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "EdTech giant"},
+            {name: "Unacademy", tier: "Tier 2", salary: "18-28", wlb: "Average", location: "Bangalore, Delhi NCR", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Online education"},
+            {name: "Vedantu", tier: "Tier 2", salary: "15-25", wlb: "Average", location: "Bangalore", tech: "React, WebRTC, Node.js", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Live online learning"},
+            {name: "Freshworks", tier: "Tier 2", salary: "18-30", wlb: "Good", location: "Chennai", tech: "React, Angular, Ruby", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "SaaS products, public company"},
+            {name: "Zoho", tier: "Tier 2", salary: "15-25", wlb: "Excellent", location: "Chennai", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Bootstrap SaaS suite"},
+            {name: "BigBasket", tier: "Tier 2", salary: "16-26", wlb: "Good", location: "Bangalore", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Grocery delivery"},
+            {name: "Grofers (Blinkit)", tier: "Tier 2", salary: "16-28", wlb: "Average", location: "Delhi NCR", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Quick commerce"},
+            {name: "Urban Company", tier: "Tier 2", salary: "18-28", wlb: "Good", location: "Delhi NCR", tech: "React, React Native, Ruby", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Home services"},
+            {name: "Lenskart", tier: "Tier 2", salary: "15-25", wlb: "Good", location: "Delhi NCR", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Eyewear e-commerce"},
+            {name: "Nykaa", tier: "Tier 2", salary: "16-26", wlb: "Good", location: "Mumbai", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Beauty e-commerce, public"},
+            
+            // Gaming & Entertainment
+            {name: "MPL", tier: "Tier 2", salary: "18-30", wlb: "Good", location: "Bangalore", tech: "React, React Native, Unity", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Mobile gaming platform"},
+            {name: "Games24x7", tier: "Tier 2", salary: "16-26", wlb: "Good", location: "Mumbai, Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "RummyCircle, My11Circle"},
+            {name: "Nazara", tier: "Tier 2", salary: "15-25", wlb: "Good", location: "Mumbai", tech: "React, React Native, Unity", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Mobile gaming, public"},
+            {name: "Disney+ Hotstar", tier: "Tier 2", salary: "20-32", wlb: "Good", location: "Mumbai", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Streaming platform"},
+            {name: "Sony LIV", tier: "Tier 2", salary: "16-26", wlb: "Good", location: "Mumbai", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "OTT platform"},
+            
+            // Fintech & Banking
+            {name: "Slice", tier: "Tier 2", salary: "18-30", wlb: "Good", location: "Bangalore", tech: "React, React Native, Kotlin", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Credit cards for millennials"},
+            {name: "Jupiter", tier: "Tier 2", salary: "20-32", wlb: "Good", location: "Mumbai", tech: "React, React Native, Go", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Neo banking"},
+            {name: "Open", tier: "Tier 2", salary: "18-28", wlb: "Good", location: "Bangalore", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "SME banking"},
+            {name: "Lendingkart", tier: "Tier 2", salary: "15-25", wlb: "Good", location: "Ahmedabad", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "SME lending"},
+            {name: "KreditBee", tier: "Tier 2", salary: "16-26", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Personal loans"},
+            
+            // Travel & Hospitality
+            {name: "MakeMyTrip", tier: "Tier 2", salary: "16-28", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Travel booking"},
+            {name: "Cleartrip", tier: "Tier 2", salary: "15-25", wlb: "Good", location: "Mumbai", tech: "React, Angular, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Travel platform"},
+            {name: "OYO", tier: "Tier 2", salary: "15-25", wlb: "Average", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Hospitality chain"},
+            {name: "Ixigo", tier: "Tier 2", salary: "14-22", wlb: "Good", location: "Delhi NCR", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Travel search"},
+            
+            // Healthcare & Wellness
+            {name: "Practo", tier: "Tier 2", salary: "16-26", wlb: "Good", location: "Bangalore", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Healthcare platform"},
+            {name: "1mg", tier: "Tier 2", salary: "15-25", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Online pharmacy"},
+            {name: "PharmEasy", tier: "Tier 2", salary: "15-24", wlb: "Good", location: "Mumbai", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Medicine delivery"},
+            {name: "Cure.fit", tier: "Tier 2", salary: "14-22", wlb: "Good", location: "Bangalore", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Health & fitness"},
+            
+            // Real Estate & PropTech
+            {name: "Housing.com", tier: "Tier 2", salary: "15-25", wlb: "Good", location: "Mumbai", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Real estate platform"},
+            {name: "99acres", tier: "Tier 2", salary: "14-22", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, .NET", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Property listings"},
+            {name: "NoBroker", tier: "Tier 2", salary: "15-24", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Brokerage-free rentals"},
+            {name: "Magicbricks", tier: "Tier 2", salary: "14-22", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Property portal"},
+            
+            // Tier 3 - Emerging & Growth Stage
+            {name: "Dunzo", tier: "Tier 3", salary: "14-22", wlb: "Average", location: "Bangalore", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Hyperlocal delivery"},
+            {name: "Shiprocket", tier: "Tier 3", salary: "15-23", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, PHP", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Logistics platform"},
+            {name: "Delhivery", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Supply chain, public"},
+            {name: "Shadowfax", tier: "Tier 3", salary: "13-20", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Last-mile delivery"},
+            {name: "LogiNext", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Mumbai", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Logistics optimization"},
+            
+            // Content & Media
+            {name: "ShareChat", tier: "Tier 3", salary: "16-26", wlb: "Average", location: "Bangalore", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Social media platform"},
+            {name: "Josh", tier: "Tier 3", salary: "14-22", wlb: "Average", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Short video platform"},
+            {name: "InMobi", tier: "Tier 3", salary: "15-24", wlb: "Good", location: "Bangalore", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Mobile advertising"},
+            {name: "Glance", tier: "Tier 3", salary: "16-25", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Lock screen platform"},
+            
+            // B2B & Enterprise
+            {name: "Chargebee", tier: "Tier 3", salary: "16-26", wlb: "Excellent", location: "Chennai", tech: "React, Angular, Ruby", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Subscription billing"},
+            {name: "Postman", tier: "Tier 3", salary: "18-30", wlb: "Excellent", location: "Bangalore", tech: "React, Angular, Node.js", remote: "Remote", difficulty: "Hard", dsaDetails: "Hard (3 rounds)", notes: "API development platform"},
+            {name: "Browserstack", tier: "Tier 3", salary: "16-28", wlb: "Excellent", location: "Mumbai", tech: "React, Angular, Ruby", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Cross-browser testing"},
+            {name: "CleverTap", tier: "Tier 3", salary: "15-25", wlb: "Good", location: "Mumbai", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Customer engagement"},
+            {name: "WebEngage", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Mumbai", tech: "React, Angular, Ruby", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Marketing automation"},
+            
+            // Startups with Good Funding
+            {name: "Spinny", tier: "Tier 3", salary: "15-24", wlb: "Good", location: "Delhi NCR", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Used car platform"},
+            {name: "Cars24", tier: "Tier 3", salary: "14-22", wlb: "Average", location: "Delhi NCR", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Car trading platform"},
+            {name: "Droom", tier: "Tier 3", salary: "13-20", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Online vehicle marketplace"},
+            {name: "ElasticRun", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Pune", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "B2B e-commerce"},
+            {name: "Meesho", tier: "Tier 3", salary: "16-26", wlb: "Good", location: "Bangalore", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Social commerce"},
+            
+            // Crypto & Web3
+            {name: "CoinDCX", tier: "Tier 3", salary: "16-28", wlb: "Good", location: "Mumbai", tech: "React, React Native, Node.js", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2-3 rounds)", notes: "Crypto exchange"},
+            {name: "WazirX", tier: "Tier 3", salary: "15-25", wlb: "Good", location: "Mumbai", tech: "React, Angular, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Crypto platform"},
+            {name: "Polygon", tier: "Tier 3", salary: "18-30", wlb: "Good", location: "Bangalore", tech: "React, Web3.js, TypeScript", remote: "Remote", difficulty: "Hard", dsaDetails: "Hard (3 rounds)", notes: "Blockchain infrastructure"},
+            
+            // Additional Product Companies
+            {name: "Mindtickle", tier: "Tier 3", salary: "15-25", wlb: "Good", location: "Pune", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Sales readiness platform"},
+            {name: "Helpshift", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Mumbai", tech: "React, Angular, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Customer support platform"},
+            {name: "Haptik", tier: "Tier 3", salary: "15-23", wlb: "Good", location: "Mumbai", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Conversational AI"},
+            {name: "Darwinbox", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Hyderabad", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "HR tech platform"},
+            {name: "GreyOrange", tier: "Tier 3", salary: "15-24", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Robotics & AI"},
+            {name: "Livspace", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Home interior platform"},
+            {name: "UrbanClap", tier: "Tier 3", salary: "13-20", wlb: "Good", location: "Delhi NCR", tech: "React, React Native, Ruby", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Medium (2 rounds)", notes: "Home services (now Urban Company)"},
+            {name: "Licious", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Bangalore", tech: "React, React Native, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1 round)", notes: "Fresh meat delivery"},
+            {name: "Country Delight", tier: "Tier 3", salary: "13-20", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Fresh dairy delivery"},
+            {name: "Rebel Foods", tier: "Tier 3", salary: "14-22", wlb: "Good", location: "Mumbai", tech: "React, React Native, Python", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Easy (1-2 rounds)", notes: "Cloud kitchen platform"},
+            {name: "Boat", tier: "Tier 3", salary: "13-21", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Audio accessories"},
+            {name: "Sugar Cosmetics", tier: "Tier 3", salary: "12-20", wlb: "Good", location: "Mumbai", tech: "React, Angular, PHP", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Beauty e-commerce"},
+            {name: "Mamaearth", tier: "Tier 3", salary: "13-21", wlb: "Good", location: "Delhi NCR", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Natural personal care"},
+            {name: "Purplle", tier: "Tier 3", salary: "12-20", wlb: "Good", location: "Mumbai", tech: "React, Angular, Java", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Beauty marketplace"},
+            {name: "MyGlamm", tier: "Tier 3", salary: "12-19", wlb: "Good", location: "Mumbai", tech: "React, React Native, PHP", remote: "Hybrid", difficulty: "Medium", dsaDetails: "Not required", notes: "Beauty & personal care"}
+        ];
+
+        let filteredCompanies = companies;
+
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            filteredCompanies.forEach(company => {
+                const row = document.createElement('tr');
+                const tierClass = company.tier.toLowerCase().replace(' ', '-');
+                row.className = tierClass;
+                
+                const wlbClass = company.wlb === 'Excellent' ? 'wlb-excellent' : 
+                               company.wlb === 'Good' ? 'wlb-good' : 'wlb-average';
+                
+                row.innerHTML = `
+                    <td class="company-name">${company.name}</td>
+                    <td>${company.tier}</td>
+                    <td class="salary-range">₹${company.salary}</td>
+                    <td class="${wlbClass}">${company.wlb}</td>
+                    <td class="location">${company.location}</td>
+                    <td class="tech-stack">${company.tech}</td>
+                    <td>${company.remote}</td>
+                    <td>${company.difficulty}</td>
+                    <td>${company.dsaDetails || 'N/A'}</td>
+                    <td>${company.notes}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function sortAndRender() {
+            const sortValue = document.getElementById('sortOptions').value;
+            const [key, order] = sortValue.split('-');
+
+            filteredCompanies.sort((a, b) => {
+                let valA, valB;
+
+                if (key === 'salary') {
+                    valA = parseInt(a.salary.split('-')[1]); // get max salary
+                    valB = parseInt(b.salary.split('-')[1]);
+                } else { // name
+                    valA = a.name.toLowerCase();
+                    valB = b.name.toLowerCase();
+                }
+
+                if (valA < valB) return order === 'asc' ? -1 : 1;
+                if (valA > valB) return order === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            renderTable();
+        }
+
+        function filterCompanies() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const locationFilter = document.getElementById('locationFilter').value;
+            const wlbFilter = document.getElementById('wlbFilter').value;
+            const tierFilter = document.getElementById('tierFilter').value;
+            const dsaFilter = document.getElementById('dsaFilter').value;
+            
+            filteredCompanies = companies.filter(company => {
+                const matchesSearch = company.name.toLowerCase().includes(searchTerm) ||
+                                    company.tech.toLowerCase().includes(searchTerm) ||
+                                    company.notes.toLowerCase().includes(searchTerm);
+                const matchesLocation = !locationFilter || company.location.includes(locationFilter);
+                const matchesWLB = !wlbFilter || company.wlb === wlbFilter;
+                const matchesTier = !tierFilter || company.tier === tierFilter;
+                const matchesDSA = !dsaFilter || (company.dsaDetails && company.dsaDetails.startsWith(dsaFilter));
+                
+                return matchesSearch && matchesLocation && matchesWLB && matchesTier && matchesDSA;
+            });
+            
+            sortAndRender();
+        }
+
+        function exportToCSV() {
+            const headers = ['Company', 'Tier', 'Salary Range (LPA)', 'Work-Life Balance', 'Primary Location', 'Tech Stack', 'Remote Policy', 'Interview Difficulty', 'DSA & Rounds', 'Notes'];
+            const csvContent = [
+                headers.join(','),
+                ...filteredCompanies.map(company => [
+                    `"${company.name}"`,
+                    `"${company.tier}"`,
+                    `"₹${company.salary}"`,
+                    `"${company.wlb}"`,
+                    `"${company.location}"`,
+                    `"${company.tech}"`,
+                    `"${company.remote}"`,
+                    `"${company.difficulty}"`,
+                    `"${company.dsaDetails || 'N/A'}"`,
+                    `"${company.notes}"`
+                ].join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'frontend_companies_20plus_lpa.csv';
+            link.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterCompanies);
+        document.getElementById('locationFilter').addEventListener('change', filterCompanies);
+        document.getElementById('wlbFilter').addEventListener('change', filterCompanies);
+        document.getElementById('tierFilter').addEventListener('change', filterCompanies);
+        document.getElementById('dsaFilter').addEventListener('change', filterCompanies);
+        document.getElementById('sortOptions').addEventListener('change', sortAndRender);
+
+        // Initial render
+        filterCompanies();
+    </script>
+</body>
+</html>
