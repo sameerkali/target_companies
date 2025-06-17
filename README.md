@@ -9,9 +9,9 @@ This project is a searchable, filterable, and sortable list of **top product-bas
 - 📍 Filter by location, work-life balance, company tier, and DSA difficulty
 - 📊 Sort by salary or company name
 - 📤 Export data to CSV with one click
-- 🌐 External links to career portals and LinkedIn profiles
+- 🌐 External links to career portals and LinkedIn 
 
----
+
 
 ## 🛠️ Tech Stack
 
